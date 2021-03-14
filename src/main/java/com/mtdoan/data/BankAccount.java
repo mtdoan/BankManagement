@@ -1,10 +1,13 @@
 package com.mtdoan.data;
 
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 public final class BankAccount {
 
-  private final String number;
-  private final String name;
-  private double balance;
+  final String number;
+  final String name;
+  double balance;
 
   public BankAccount(String number, String name) {
     this.number = number;
@@ -12,8 +15,18 @@ public final class BankAccount {
     balance = 0;
   }
 
+  public BankAccount(String number, String name, double balance) {
+    this.number = number;
+    this.name = name;
+    this.balance = balance;
+  }
+
   public double getBalance() {
     return balance;
+  }
+
+  public String getName() {
+    return name;
   }
 
   public void withdraw(double money) {
@@ -34,5 +47,20 @@ public final class BankAccount {
       return;
     }
     balance += money;
+  }
+
+
+  public static BankAccount importFromScanner(Scanner scanner) {
+    String number = scanner.nextLine();
+    String name = scanner.nextLine();
+    double balance = scanner.nextDouble();
+    scanner.nextLine();
+    return new BankAccount(number, name, balance);
+  }
+
+  public void exportToWriter(PrintWriter outputWriter) {
+    outputWriter.println(number);
+    outputWriter.println(name);
+    outputWriter.println(balance);
   }
 }
